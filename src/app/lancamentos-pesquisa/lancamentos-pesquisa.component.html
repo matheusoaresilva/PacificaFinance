@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="grid">
+    <div class="col-12">
+      <h1>Lançamentos</h1>
+    </div>
+
+    <div class="col-12 field" style="padding-bottom: 15px">
+      <label for="">Descrição</label>
+      <input type="text" pInputText class="p-inputtext-sm w-full descricao" />
+    </div>
+
+    <div class="col-12 field">
+      <label style="display: block">Vencimento</label>
+      <input
+        type="text"
+        pInputText
+        class="p-inputtext-sm"
+        style="width: 95px"
+      />
+
+      <label> Até </label>
+      <input
+        type="text"
+        pInputText
+        class="p-inputtext-sm"
+        style="width: 95px"
+      />
+    </div>
+
+    <div class="col-12 p-button-sm" style="padding-top: 15px">
+      <p-button label="Pesquisar"></p-button>
+    </div>
+
+    <div class="col-12">
+      <p-table
+        [value]="lancamentos"
+        [paginator]="true"
+        [rows]="3"
+        [responsive]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Pessoa</th>
+            <th>Valor</th>
+            <th>Tipo</th>
+            <th>Descrição</th>
+            <th>Data de vencimento</th>
+            <th>Data de pagamento</th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-lancamentos>
+          <tr>
+            <td>{{ lancamentos.pessoa }}</td>
+            <td [style.color]="lancamentos.tipo === 'DESPESA' ? 'red' : 'blue'">
+              {{ lancamentos.valor }}
+            </td>
+            <td>{{ lancamentos.tipo }}</td>
+            <td>{{ lancamentos.descricao }}</td>
+            <td>{{ lancamentos.dataVencimento }}</td>
+            <td>{{ lancamentos.dataPagamento }}</td>
+            <td>
+              <button
+                pTooltip="Editar"
+                tooltipPosition="top"
+                class="color-icon"
+              >
+                <fa-icon
+                  [icon]="faPencil"
+                  [border]="false"
+                  [style]="{ display: 'inline-block', padding: '5px' }"
+                ></fa-icon>
+              </button>
+              <button
+                pTooltip="Deletar"
+                tooltipPosition="top"
+                class="color-icon"
+                class="button-trash"
+              >
+                <fa-icon
+                  [icon]="faTrash"
+                  [border]="false"
+                  [style]="{ display: 'inline-block', padding: '5px' }"
+                ></fa-icon>
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="col-12 p-button-sm" style="padding-top: 15px">
+      <p-button label="Novo lançamento"></p-button>
+    </div>
+  </div>
+</div>
+
